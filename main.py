@@ -48,6 +48,39 @@ def check_ticker(list):
 
     return valid_tickers, invalid_tickers
 
+def beta_calculate(valid_tickers):
+    benchmark="^GSPC"
+    start="2025-05-15"
+    end="2025-11-15"
+    valid_stocks_with_beta = []
+    for i in valid_tickers:
+        data = yf.download([i,benchmark], start=start, end=end)["Close"]
+
+        rets = data.pct_change().dropna()
+
+        stock_ret = rets[i]
+        bench_ret = rets[benchmark]
+
+        cov = np.cov(stock_ret, bench_ret)[0][1]
+        var = np.var(bench_ret)
+
+        beta = cov / var
+        valid_stocks_with_beta .append([i,float(np.round(beta, 5))])
+    return valid_stocks_with_beta
+
+
+def beta_filtration(valid_tickers):
+    x = beta_calculate(valid_tickers)
+    final = []
+    remaining = []
+    for i in x:
+        if 0.8 <= i[1] <= 1.2:
+            final.append(i)
+        else:
+            remaining.append(i)
+    return remaining, final
+
+
 def main():
     tickers_list = read_csv("Tickers.csv")
     valid, invalid = check_ticker(tickers_list)
