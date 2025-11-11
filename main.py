@@ -85,8 +85,21 @@ def main():
     tickers_list = read_csv("Tickers.csv")
     valid, invalid = check_ticker(tickers_list)
 
+    x,y = beta_filtration(valid)
+
     print("Valid:", valid)
+    print()
+    
     print("Invalid:", invalid)
+    print()
+
+    print(x)
+
+    print()
+    print(y)
 
 if __name__ == "__main__":
     main()
+
+
+
