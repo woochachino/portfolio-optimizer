@@ -14,31 +14,47 @@ def read_csv(filename):
 def check_ticker(list):
     valid_tickers=[]
     invalid_tickers=[]
+    start = "2024-10-01"
+    end = "2025-10-01"
+
+    market = yf.Ticker("^GSPC")
+    market_data = market.history(start=start, end=end, interval="1d")
+    market_data["Market_Return"] = market_data["Close"].pct_change()
+
 
     for ticker in list:
         stock = yf.Ticker(ticker)
-        data = stock.history(period="1d")
+        data = stock.history(start=start, end=end, interval="1d")
 
         if data.empty:
             invalid_tickers.append(ticker)
-        else:
-            valid_tickers.append(ticker)
+            continue
+
+        avg_volume = data["Volume"].mean()
+
+
+        if avg_volume < 5000:
+            invalid_tickers.append(ticker)
+            continue
+
+        valid_tickers.append(ticker)
+
+        # For Companies in S&P 500/TSX, add them to the final list
+        market_of_ticker = stock.info.get("market")
+        print(market_of_ticker)
+        if market_of_ticker not in ["us_market", "ca_market"]:
+            invalid_tickers.append(ticker)
+            valid_tickers.remove(ticker)
+            continue
+
+        #Calculate beta and filter it out
+
     return valid_tickers, invalid_tickers
 
 
 def main():
-    list=read_csv("Tickers.csv")
-    valid, invalid = check_ticker(list)
-    for i in valid:
-        stock = yf.Ticker(i)
-        start = "2024-10-01"
-        end = "2025-10-01"
-        data = stock.history(start=start, end=end, interval="1d")
-        avg_volume = data["Volume"].mean()
-        print(avg_volume)
-        if avg_volume < 5000:
-            invalid.append(i)
-            valid.remove(i)
+    tickers_list = read_csv("Test.csv")
+    valid, invalid = check_ticker(tickers_list)
 
     print("Valid:", valid)
     print("Invalid:", invalid)
