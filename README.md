@@ -1,4 +1,4 @@
-## About
+# About
 
 This repository contains **Team 13’s submission** to the **CFM 101 annual team competition** at the **University of Waterloo**.  
 The project placed **1st overall**, achieving a **3.23% portfolio return over one week** during a **3.93% benchmark return period**.
@@ -13,9 +13,8 @@ This project implements a **systematic, rules-based equity portfolio pipeline** 
 The full approach and decision-making process can be found in the Jupyter Notebook file at notebooks/market_meet_portfolio.ipynb
 
 
----
 
-## Key Features
+# Key Features
 
 - Ticker validation and liquidity filtering
 - Blended benchmark construction (S&P 500 + TSX)
@@ -26,11 +25,10 @@ The full approach and decision-making process can be found in the Jupyter Notebo
 - Fully configurable via command-line arguments
 - Notebook-based walkthrough for explanation and visualization
 
----
 
-## Methodology Overview
+# Methodology Overview
 
-### 1. Ticker Validation
+## 1. Ticker Validation
 Candidate tickers are filtered based on:
 - Availability of historical price data
 - Average daily trading volume
@@ -38,18 +36,16 @@ Candidate tickers are filtered based on:
 
 This ensures that only liquid, tradable securities are considered.
 
----
 
-### 2. Benchmark Construction
+## 2. Benchmark Construction
 A **blended benchmark** is constructed using:
 - S&P 500 (`^GSPC`)
 - TSX Composite (`^GSPTSE`)
 
 Daily benchmark returns are computed as the equal-weight average of both indices.
 
----
 
-### 3. Risk Estimation
+## 3. Risk Estimation
 For each valid ticker, the system estimates:
 - **Rolling beta** relative to the blended benchmark
 - **Rolling correlation** with the benchmark
@@ -58,9 +54,8 @@ For each valid ticker, the system estimates:
 
 Rolling windows are used to emphasize recent behavior and reduce noise.
 
----
 
-### 4. Scoring Model
+## 4. Scoring Model
 Each stock is scored based on its distance from an “ideal” benchmark-relative profile:
 - Beta close to 1
 - High correlation with the benchmark
@@ -68,8 +63,8 @@ Each stock is scored based on its distance from an “ideal” benchmark-relativ
 
 A composite score is computed and normalized to produce portfolio weights.
 
----
-### 5. Portfolio Construction & Constraints
+
+## 5. Portfolio Construction & Constraints
 The raw portfolio is refined through multiple constraint layers:
 - Maximum position weight
 - Maximum sector exposure
@@ -81,7 +76,6 @@ The raw portfolio is refined through multiple constraint layers:
 
 Weights are normalized after each step to ensure full investment.
 
----
 
 ## Repository Structure
 
@@ -94,8 +88,6 @@ Weights are normalized after each step to ensure full investment.
 ├── Tickers.csv
 └── README.md
 ```
-
----
 
 
 ## Usage
@@ -131,7 +123,6 @@ python main.py \
   --outdir outputs
 ```
 
----
 
 ## Outputs
 
@@ -140,7 +131,6 @@ python main.py \
 
 
 
----
 
 ## Summary
 
