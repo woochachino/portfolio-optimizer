@@ -4,7 +4,7 @@ This repository contains **Team 13’s submission** to the **CFM 101 annual team
 The project placed **1st overall**, achieving a 0.54% tracking error with the market over one live week of trading.
 
 
-# Market Meet — Quantitative Portfolio Construction
+## Quantitative Portfolio Optimization Engine - Market Meet
 
 A benchmark-relative quantitative portfolio construction system built in Python.
 
@@ -14,7 +14,7 @@ The full approach and decision-making process can be found in the Jupyter Notebo
 
 
 
-# Key Features
+## Key Features
 
 - Ticker validation and liquidity filtering
 - Blended benchmark construction (S&P 500 + TSX)
@@ -26,9 +26,9 @@ The full approach and decision-making process can be found in the Jupyter Notebo
 - Notebook-based walkthrough for explanation and visualization
 
 
-# Methodology Overview
+## Methodology Overview
 
-## 1. Ticker Validation
+### 1. Ticker Validation
 Candidate tickers are filtered based on:
 - Availability of historical price data
 - Average daily trading volume
@@ -37,7 +37,7 @@ Candidate tickers are filtered based on:
 This ensures that only liquid, tradable securities are considered.
 
 
-## 2. Benchmark Construction
+### 2. Benchmark Construction
 A **blended benchmark** is constructed using:
 - S&P 500 (`^GSPC`)
 - TSX Composite (`^GSPTSE`)
@@ -45,7 +45,7 @@ A **blended benchmark** is constructed using:
 Daily benchmark returns are computed as the equal-weight average of both indices.
 
 
-## 3. Risk Estimation
+### 3. Risk Estimation
 For each valid ticker, the system estimates:
 - **Rolling beta** relative to the blended benchmark
 - **Rolling correlation** with the benchmark
@@ -55,7 +55,7 @@ For each valid ticker, the system estimates:
 Rolling windows are used to emphasize recent behavior and reduce noise.
 
 
-## 4. Scoring Model
+### 4. Scoring Model
 Each stock is scored based on its distance from an “ideal” benchmark-relative profile:
 - Beta close to 1
 - High correlation with the benchmark
@@ -64,7 +64,7 @@ Each stock is scored based on its distance from an “ideal” benchmark-relativ
 A composite score is computed and normalized to produce portfolio weights.
 
 
-## 5. Portfolio Construction & Constraints
+### 5. Portfolio Construction & Constraints
 The raw portfolio is refined through multiple constraint layers:
 - Maximum position weight
 - Maximum sector exposure
@@ -131,7 +131,3 @@ python main.py \
 
 
 
-
-## Summary
-
-This project demonstrates systematic portfolio construction, risk-aware allocation, practical constraint handling, and clean separation between research and execution logic. It is intended as a foundational quantitative finance project showcasing both analytical reasoning and software engineering practices.
