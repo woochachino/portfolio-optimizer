@@ -1,7 +1,7 @@
 # About
 
 This repository contains **Team 13’s submission** to the **CFM 101 annual team competition** at the **University of Waterloo**.  
-The project placed **1st overall**, achieving a **3.23% portfolio return over one week** during a **3.93% benchmark return period**.
+The project placed **1st overall**, achieving a 0.54% tracking error with the market over one live week of trading.
 
 
 # Market Meet — Quantitative Portfolio Construction
